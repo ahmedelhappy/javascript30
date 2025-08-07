@@ -1,0 +1,26 @@
+
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (audio === null) return;
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+
+
+  // Testing Out Stuff
+  // window.addEventListener('keydown', function (e) {
+  //   // console.log(e.keyCode)
+  //   const key2 = this.document.querySelector(`div`);
+  //   console.log(key2);
+  // });
